@@ -1,0 +1,20 @@
+[package]
+name = "toml_config_util"
+version = "0.1.0"
+authors = ["Yuri Titov <yuri@parsesoftware.com>"]
+edition = "2018"
+
+[dependencies]
+toml = "0.5"
+named_type = "0.2"
+failure = "0.1"
+serde = "1.0"
+serde_derive = "1.0"
+
+# reminder: cargo test -- --nocapture will print debugging output during tests
+[[test]]
+name = "test"
+path = "src/test/cfg.rs"
+
+[dev-dependencies]
+named_type_derive = "0.2"
