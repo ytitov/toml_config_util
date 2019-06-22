@@ -52,6 +52,14 @@ pub mod cfg {
                 bail!("Could not parse the config, it must return at the very least a Value::Table");
             }
 
+        // try parsing the root config with the base root props, this is for when reused prop
+        // values and to avoid repeating identical properties in each main subheading
+        pub fn try_parse_props<T> (&self) -> Fallible<T>
+            where for<'de> T: Deserialize<'de> + Serialize
+            {
+                return Ok(self.config.clone().try_into::<T>()?);
+            }
+
         pub fn parse_or_default<T> (&self) -> T
             where for<'de> T: Deserialize<'de> + NamedType + std::default::Default + Serialize
             {

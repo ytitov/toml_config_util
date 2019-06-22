@@ -15,6 +15,11 @@ mod tests {
         name: String,
     }
 
+    #[derive(Debug, Serialize, Deserialize)]
+    struct CommonConfig {
+        base_prop: String,
+    }
+
     #[test]
     fn test_configuration_parsing() {
         let cfg = Configuration::new("src/test/test.toml");
@@ -22,6 +27,16 @@ mod tests {
         assert_eq!(maybe_cfg.is_ok(), true);
         let test_cfg = maybe_cfg.unwrap();
         assert_eq!(test_cfg.name, "this is a test name");
+        println!("the configuration: {:?}", &test_cfg);
+    }
+
+    #[test]
+    fn test_base_props_parsing() {
+        let cfg = Configuration::new("src/test/test.toml");
+        let maybe_cfg = cfg.try_parse_props::<CommonConfig>();
+        assert_eq!(maybe_cfg.is_ok(), true);
+        let test_cfg = maybe_cfg.unwrap();
+        assert_eq!(test_cfg.base_prop, "IsNotNamedType");
         println!("the configuration: {:?}", &test_cfg);
     }
 
