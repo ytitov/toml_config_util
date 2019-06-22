@@ -7,7 +7,7 @@ pub mod cfg {
     use named_type::NamedType;
     use failure::{Fallible};
 
-#[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize)]
     pub struct Configuration {
         pub filename: &'static str,
         config: Value,
@@ -43,18 +43,13 @@ pub mod cfg {
                     Value::Table(obj_map) => {
                         let key = T::short_type_name();
                         if let Some(val) = obj_map.get(*&key) {
-                            /*
-                            if let Ok(meta) = val.clone().try_into::<T>() {
-                                return Ok(meta);
-                            }
-                            */
                             return Ok(val.clone().try_into::<T>()?);
                         }
                     },
                     _ => {
                     },
                 };
-                bail!("Could not parse the config");
+                bail!("Could not parse the config, it must return at the very least a Value::Table");
             }
 
         pub fn parse_or_default<T> (&self) -> T
