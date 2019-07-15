@@ -53,7 +53,10 @@ pub mod cfg {
                 }
                 _ => {}
             };
-            bail!("Could not parse the config, it must return at the very least a Value::Table");
+            bail!(format!(
+                "Could not parse the config.  It must contain at the very least the line: [{:}]",
+                T::short_type_name()
+            ));
         }
 
         // try parsing the root config with the base root props, this is for when reused prop
