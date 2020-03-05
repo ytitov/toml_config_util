@@ -5,6 +5,7 @@ authors = ["Yuri Titov <yuri@parsesoftware.com>"]
 edition = "2018"
 
 [dependencies]
+quote = "=1.0.2" # due to compilation error issue http://users.rust-lang.org/t/failure-derive-compilation-error/39062
 toml = "0.5"
 named_type = "0.2"
 failure = "0.1"
